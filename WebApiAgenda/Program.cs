@@ -13,6 +13,7 @@ using WebApiAgenda.Logging;
 using WebApiAgenda.Repository;
 using WebApiAgenda.Service;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

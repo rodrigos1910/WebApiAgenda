@@ -20,15 +20,17 @@ namespace WebApiAgenda.Repository
             _dbConnection = dbConnection;
             _logger = logger;
         }
-               
-        public void Atualizar(long id, Contato contato)
+
+        public bool Atualizar(long id, Contato contato)
         {
-            var comandoSql = @"UPDATE CONTATO SET Nome = @Nome, Email = @Email, Telefone = @Telefone, Ddd = @Ddd WHERE Id = @Id";
-            _logger.LogInformation($"Contato com ID {id} atualizado.");
-            _dbConnection.Execute(comandoSql, contato);
+            var linhasAfetadas = _dbConnection.Execute(
+                @"UPDATE CONTATO SET Nome = @Nome, Email = @Email, Telefone = @Telefone, Ddd = @Ddd WHERE Id = @Id",
+                new { contato.Nome, contato.Email, contato.Telefone, contato.Ddd, Id = id });
+
+            return linhasAfetadas > 0;
         }
 
-       
+
         public Contato Criar(Contato contato)
         {
             var comandoSql = @"INSERT INTO CONTATO (Nome, Email, Telefone, Ddd) VALUES (@Nome, @Email, @Telefone, @Ddd);
