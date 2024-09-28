@@ -35,7 +35,7 @@ public class ContatoRepositoryTests : IDisposable
         _repository = new ContatoRepository(_dbConnection, logger);
 
         // Limpar a tabela antes de cada teste
-        _dbConnection.Execute("TRUNCATE TABLE CONTATO");
+        //_dbConnection.Execute("TRUNCATE TABLE CONTATO");
     }
 
     [Fact(DisplayName = "Criar Contato - Deve Retornar Contato com ID")]
@@ -140,7 +140,7 @@ public class ContatoRepositoryTests : IDisposable
     public void Dispose()
     {
        //  Limpa o banco de dados após cada teste
-        _dbConnection.Execute("TRUNCATE TABLE CONTATO");
+       // _dbConnection.Execute("TRUNCATE TABLE CONTATO");
         _dbConnection.Dispose();
     }
 }
