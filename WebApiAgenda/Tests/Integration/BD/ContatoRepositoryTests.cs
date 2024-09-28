@@ -119,7 +119,7 @@ public class ContatoRepositoryTests : IDisposable
         Assert.Equal(contato.Email, contatoObtido.Email);
     }
 
-
+    //teste
     [Fact(DisplayName = "Atualizar Contato Inexistente - Deve Lançar Exceção")]
     [Trait("Contato", "Atualização")]
     public void AtualizarContato_Inexistente_DeveLancarExcecao()
