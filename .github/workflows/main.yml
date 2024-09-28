@@ -11,18 +11,20 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
-
+    # Usar o runner auto-hospedado e especificar o sistema operacional (Windows no caso)
+    runs-on: self-hosted
+    # Você pode usar etiquetas adicionais como Windows e X64 para especificar ainda mais o runner.
+    
     steps:
-    # Passo para baixar o código do repositório
+    # Baixar o código do repositório
     - name: Check out the repository
       uses: actions/checkout@v2
 
-    # Passo para configurar o SDK do .NET 8
+    # Configurar o SDK do .NET 8 no seu runner (se necessário)
     - name: Set up .NET Core
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '8.0.x'  # Define que será usado o .NET 8
+        dotnet-version: '8.0.x'
 
     # Restaurar as dependências do projeto
     - name: Restore dependencies
