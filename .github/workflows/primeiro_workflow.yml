@@ -2,45 +2,37 @@ name: .NET Test Workflow
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   build:
 
-    # Usar o runner auto-hospedado e especificar o sistema operacional (Windows no caso)
     runs-on: self-hosted
-    # Você pode usar etiquetas adicionais como Windows e X64 para especificar ainda mais o runner.
-    
+
     steps:
 
-    # Aviso de inicialização
     - name: warning starting
       run: echo "Iniciando jobs!"
 
-    # Baixar o código do repositório
     - name: Check out the repository
       uses: actions/checkout@v2
 
-    # Configurar o SDK do .NET 8 no seu runner (se necessário)
     - name: Set up .NET Core
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '8.0.x'
 
-    # Restaurar as dependências do projeto
     - name: Restore dependencies
       run: dotnet restore
 
-    # Compilar o projeto
     - name: Build
       run: dotnet build --configuration Release --no-restore
 
-    # Executar os testes
     - name: Run tests
       run: dotnet test --configuration Release --no-restore --verbosity normal
 
-    # Aviso de inicialização
     - name: warning finishin
       run: echo "Finalizando jobs!"
