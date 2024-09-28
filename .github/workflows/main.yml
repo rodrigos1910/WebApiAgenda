@@ -1,0 +1,37 @@
+name: .NET Test Workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    # Passo para baixar o código do repositório
+    - name: Check out the repository
+      uses: actions/checkout@v2
+
+    # Passo para configurar o SDK do .NET 8
+    - name: Set up .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'  # Define que será usado o .NET 8
+
+    # Restaurar as dependências do projeto
+    - name: Restore dependencies
+      run: dotnet restore
+
+    # Compilar o projeto
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+
+    # Executar os testes
+    - name: Run tests
+      run: dotnet test --configuration Release --no-restore --verbosity normal
